@@ -79,15 +79,14 @@ function calculateProfit() {
     let output = `
 💼 *Pattani Stone Trading*
 
-📥 *Input:*
 📦 No of Loads: ${loads}
 🗓️ Month: ${month}
 👤 Investor: ${investor}
 
-📊 *Results:*
+🧾 *Calculation:*
 💰 Profit per Load: ₹750
 💵 Total Profit: ₹${totalProfit.toFixed(2)}
-🧾 Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
+📊 Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
 ✅ ${investor} Profit (70%): ₹${investorProfit.toFixed(2)}
     `;
 
@@ -113,4 +112,5 @@ function sendToWhatsApp() {
 
 </body>
 </html>
+
 
