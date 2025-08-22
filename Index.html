@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pattani Stone Trading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery & jQuery Mobile -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+        .result-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+        }
+        .copy-btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="mainPage">
+    <div data-role="header">
+        <h1>Pattani Stone Trading</h1>
+    </div>
+
+    <div data-role="content">
+        <label for="numLoads">Number of Loads:</label>
+        <input type="number" id="numLoads" placeholder="Enter number of loads">
+
+        <label for="month">Select Month:</label>
+        <select id="month">
+            <option value="">-- Select Month --</option>
+            <option>January</option>
+            <option>February</option>
+            <option>March</option>
+            <option>April</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>August</option>
+            <option>September</option>
+            <option>October</option>
+            <option>November</option>
+            <option>December</option>
+        </select>
+
+        <label for="investorName">Investor Name:</label>
+        <input type="text" id="investorName" placeholder="Enter investor name">
+
+        <a href="#" data-role="button" onclick="calculateProfit()">Calculate</a>
+
+        <div id="results" class="result-box" style="display:none;"></div>
+
+        <a href="#" data-role="button" class="copy-btn" onclick="sendToWhatsApp()">Send via WhatsApp</a>
+    </div>
+</div>
+
+<script>
+function calculateProfit() {
+    let loads = parseInt(document.getElementById('numLoads').value);
+    let month = document.getElementById('month').value;
+    let investor = document.getElementById('investorName').value;
+
+    if (isNaN(loads) || !month || !investor.trim()) {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+
+    const profitPerLoad = 750;
+    let totalProfit = profitPerLoad * loads;
+    let aseelCommission = totalProfit * 0.30;
+    let investorProfit = totalProfit * 0.70;
+
+    let output = `
+Pattani Stone Trading
+
+Loads: ${loads}
+Month: ${month}
+Investor: ${investor}
+
+Calculation:
+Profit per Load: ₹750
+Total Profit: ₹${totalProfit.toFixed(2)}
+Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
+${investor} Profit (70%): ₹${investorProfit.toFixed(2)}
+    `;
+
+    document.getElementById('results').innerHTML = output.replace(/\n/g, '<br>');
+    document.getElementById('results').style.display = 'block';
+
+    // Store message for WhatsApp
+    window.copyText = output;
+}
+
+function sendToWhatsApp() {
+    if (!window.copyText) {
+        alert("Please calculate first.");
+        return;
+    }
+
+    let encodedText = encodeURIComponent(window.copyText);
+    let whatsappURL = `https://wa.me/?text=${encodedText}`;
+
+    window.open(whatsappURL, '_blank');
+}
+</script>
+
+</body>
+</html>
