@@ -77,17 +77,18 @@ function calculateProfit() {
     let investorProfit = totalProfit * 0.70;
 
     let output = `
-Pattani Stone Trading
+💼 *Pattani Stone Trading*
 
-Loads: ${loads}
-Month: ${month}
-Investor: ${investor}
+📥 *Input:*
+📦 Loads: ${loads}
+🗓️ Month: ${month}
+👤 Investor: ${investor}
 
-Calculation:
-Profit per Load: ₹750
-Total Profit: ₹${totalProfit.toFixed(2)}
-Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
-${investor} Profit (70%): ₹${investorProfit.toFixed(2)}
+📊 *Results:*
+💰 Profit per Load: ₹750
+💵 Total Profit: ₹${totalProfit.toFixed(2)}
+🧾 Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
+✅ ${investor} Profit (70%): ₹${investorProfit.toFixed(2)}
     `;
 
     document.getElementById('results').innerHTML = output.replace(/\n/g, '<br>');
