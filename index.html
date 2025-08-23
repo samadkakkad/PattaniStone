@@ -49,9 +49,6 @@
             <option>December</option>
         </select>
 
-        <label for="investorName">Investor Name:</label>
-        <input type="text" id="investorName" placeholder="Enter investor name">
-
         <a href="#" data-role="button" onclick="calculateProfit()">Calculate</a>
 
         <div id="results" class="result-box" style="display:none;"></div>
@@ -64,36 +61,43 @@
 function calculateProfit() {
     let loads = parseFloat(document.getElementById('numLoads').value);
     let month = document.getElementById('month').value;
-    let investor = document.getElementById('investorName').value;
 
-    if (isNaN(loads) || !month || !investor.trim()) {
+    if (isNaN(loads) || !month) {
         alert("Please fill in all fields correctly.");
         return;
     }
 
-    const profitPerLoad = 760;
-    let totalProfit = profitPerLoad * loads;
-    let aseelCommission = totalProfit * 0.30;
-    let investorProfit = totalProfit * 0.70;
+    const profitPerLoad = 760 * 2;
+    const totalProfit = profitPerLoad * loads;
+    const aseelCommission = totalProfit * 0.30;
+    const investorShare = totalProfit * 0.70;
+
+    // Split: Samad (3), Ramsy (2), 3rdMan (1) => total parts = 6
+    const totalParts = 6;
+    const samadProfit = (3 / totalParts) * investorShare;
+    const ramsyProfit = (2 / totalParts) * investorShare;
+    const thirdManProfit = (1 / totalParts) * investorShare;
 
     let output = `
 💼 *Pattani Stone Trading*
 
 📦 No of Loads: ${loads}
 🗓️ Month: ${month}
-👤 Investor: ${investor}
 
 🧾 *Calculation:*
-💰 Profit per Load: ₹760
+💰 Profit per Load: ₹${profitPerLoad}
 💵 Total Profit: ₹${totalProfit.toFixed(2)}
 📊 Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
-✅ ${investor} Profit (70%): ₹${investorProfit.toFixed(2)}
+
+👥 *Investor Shares (70% of total)*:
+🔹 Samad (3 parts): ₹${samadProfit.toFixed(2)}
+🔹 Ramsy (2 parts): ₹${ramsyProfit.toFixed(2)}
+🔹 3rdMan (1 part): ₹${thirdManProfit.toFixed(2)}
     `;
 
     document.getElementById('results').innerHTML = output.replace(/\n/g, '<br>');
     document.getElementById('results').style.display = 'block';
 
-    // Store message for WhatsApp
     window.copyText = output;
 }
 
@@ -105,14 +109,9 @@ function sendToWhatsApp() {
 
     let encodedText = encodeURIComponent(window.copyText);
     let whatsappURL = `https://wa.me/?text=${encodedText}`;
-
     window.open(whatsappURL, '_blank');
 }
 </script>
 
 </body>
 </html>
-
-
-
-
