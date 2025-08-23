@@ -71,7 +71,7 @@ function calculateProfit() {
         return;
     }
 
-    const profitPerLoad = 750;
+    const profitPerLoad = 760;
     let totalProfit = profitPerLoad * loads;
     let aseelCommission = totalProfit * 0.30;
     let investorProfit = totalProfit * 0.70;
@@ -84,7 +84,7 @@ function calculateProfit() {
 👤 Investor: ${investor}
 
 🧾 *Calculation:*
-💰 Profit per Load: ₹750
+💰 Profit per Load: ₹760
 💵 Total Profit: ₹${totalProfit.toFixed(2)}
 📊 Aseel Commission (30%): ₹${aseelCommission.toFixed(2)}
 ✅ ${investor} Profit (70%): ₹${investorProfit.toFixed(2)}
@@ -112,6 +112,7 @@ function sendToWhatsApp() {
 
 </body>
 </html>
+
 
 
 
